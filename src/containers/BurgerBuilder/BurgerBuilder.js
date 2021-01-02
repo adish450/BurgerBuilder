@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -8,6 +7,8 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import axios from '../../axios-orders';
 import withErrorHandler from '../../withErrorHandler/withErrorHandler';
 import Spinner from '../../components/UI/Spinner/Spinner';
+
+
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -93,29 +94,42 @@ class BurgerBuilder extends Component {
     purchaseContinueHandler = () => {
 
         this.setState({ loading: true })
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'adish',
-                address: {
-                    street: 'dasda',
-                    zipCode: '1564532',
-                    country: 'India'
-                },
-                email: 'random@gmail.com'
-            },
-            deliveryMethod: 'fastest'
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     customer: {
+        //         name: 'adish',
+        //         address: {
+        //             street: 'dasda',
+        //             zipCode: '1564532',
+        //             country: 'India'
+        //         },
+        //         email: 'random@gmail.com'
+        //     },
+        //     deliveryMethod: 'fastest'
+        // }
+        // axios.post('/orders.json', order)
+        //     .then(response => {
+        //         // console.log(response)
+        //         this.setState({ loading: false, purchasing: false })
+        //     })
+        //     .catch(error => {
+        //         // console.log(error)
+        //         this.setState({ loading: false, purchasing: false })
+        //     })
+
+        let query = [];
+
+        for (let i in this.state.ingredients) {
+            query.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
-        axios.post('/orders.json', order)
-            .then(response => {
-                // console.log(response)
-                this.setState({ loading: false, purchasing: false })
-            })
-            .catch(error => {
-                // console.log(error)
-                this.setState({ loading: false, purchasing: false })
-            })
+        const queryString = query.join('&');
+
+        console.log(queryString);
+        this.props.history.push({
+            pathname: '/Checkout',
+            search: '?' + queryString
+        });
     }
 
     render() {

@@ -1,0 +1,27 @@
+import React, { Component } from 'react';
+import Button from '../../../components/UI/Button/Button';
+import classes from './ContactData.css';
+
+class ContactData extends Component {
+
+    state = {
+        ContactData: null
+    }
+
+    render() {
+        return (
+            <div className={classes.ContactData}>
+                <h4>Enter your Contact Data</h4>
+                <form>
+                    <input className={classes.Input} type="text" name="name" placeholder="Your Name" />
+                    <input className={classes.Input} type="email" name="email" placeholder="Your Email" />
+                    <input className={classes.Input} type="text" name="Street" placeholder="Street" />
+                    <input className={classes.Input} type="text" name="postal" placeholder="Postal Code" />
+                </form>
+                <Button btnType="Success">ORDER</Button>
+            </div>
+        )
+    }
+}
+
+export default ContactData;
