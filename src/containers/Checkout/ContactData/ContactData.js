@@ -82,8 +82,7 @@ class ContactData extends Component {
                 value: '',
                 rules: {
                     required: true,
-                    minLength: 1,
-                    maxLength: 6
+                    minLength: 1
                 },
                 valid: false,
                 touched: false
@@ -96,10 +95,13 @@ class ContactData extends Component {
                         { value: 'cheapest', displayValue: 'Cheapest' }
                     ]
                 },
-                value: ''
+                value: 'cheapest',
+                rules: {},
+                valid: true
             }
         },
-        loading: false
+        loading: false,
+        formIsValid: false
     }
 
     validator(value, rules) {
@@ -160,7 +162,15 @@ class ContactData extends Component {
 
         updatedFormElement.valid = this.validator(updatedFormElement.value, updatedFormElement.rules)
         updatedFormElement.touched = true;
-        this.setState({ orderForm: updatedOrderForm });
+
+        let formIsValid = true;
+
+        for (let key in updatedOrderForm) {
+            formIsValid = updatedOrderForm[key].valid && formIsValid;
+        }
+        console.log(formIsValid)
+
+        this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
 
     }
     render() {
@@ -186,9 +196,9 @@ class ContactData extends Component {
                         Invalid={!ig.config.valid}
                         validation={ig.config.rules}
                         touched={ig.config.touched}
-                        clicked={(props) => this.onChangeHandler(props, ig.id)} />
+                        clicked={(event) => this.onChangeHandler(event, ig.id)} />
                 ))}
-                <Button btnType="Success" >ORDER</Button>
+                <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
             </form>
         )
 
