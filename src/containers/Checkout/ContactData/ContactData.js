@@ -7,6 +7,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import { connect } from 'react-redux';
 import withErrorHandler from '../../../withErrorHandler/withErrorHandler'
 import * as actions from '../../../store/actions/index';
+import { updatedObject } from '../../../shared/utility';
 
 class ContactData extends Component {
 
@@ -144,17 +145,18 @@ class ContactData extends Component {
     }
 
     onChangeHandler = (event, inputIdentifier) => {
-        const updatedOrderForm = { ...this.state.orderForm };
 
-        const updatedFormElement = {
-            ...this.state.orderForm[inputIdentifier]
-        }
+        const updatedFormElement = updatedObject(this.state.orderForm[inputIdentifier], {
+            value: event.target.value,
+            valid: this.validator(event.target.value, this.state.orderForm[inputIdentifier].rules),
+            touched: true
 
-        updatedFormElement.value = event.target.value;
-        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        })
 
-        updatedFormElement.valid = this.validator(updatedFormElement.value, updatedFormElement.rules)
-        updatedFormElement.touched = true;
+        const updatedOrderForm = updatedObject(this.state.orderForm, {
+            [inputIdentifier]: updatedFormElement
+        });
+
 
         let formIsValid = true;
 
