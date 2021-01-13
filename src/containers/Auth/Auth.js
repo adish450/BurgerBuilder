@@ -5,6 +5,8 @@ import classes from './Auth.css';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import { Redirect } from 'react-router-dom';
+
 
 class Auth extends Component {
 
@@ -105,6 +107,15 @@ class Auth extends Component {
             )
         }
 
+        let authRedirect = null;
+
+        if (this.props.isAuthenticated && !this.props.building) {
+            authRedirect = <Redirect to='/' />
+        }
+        else if (this.props.isAuthenticated && this.props.building) {
+            authRedirect = <Redirect to='/Checkout' />
+        }
+
         let form = formElementsArray.map(formElement => {
             return (
                 <Input key={formElement.id}
@@ -125,6 +136,7 @@ class Auth extends Component {
         return (
             <div className={classes.Auth}>
                 {errorMessage}
+                {authRedirect}
                 <form onSubmit={(event) => this.submitHanlder(event)}>
                     {form}
                     <Button btnType="Success" >SUBMIT</Button>
@@ -138,7 +150,9 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null,
+        building: state.burgerBuilder.building
     }
 }
 
