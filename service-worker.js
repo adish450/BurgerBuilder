@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["C:/Users/Adish/Documents/burger-builder/build/index.html","53820c94053226aecde61bc17d37317e"],["C:/Users/Adish/Documents/burger-builder/build/static/css/main.cc4489fd.css","38902a3d3d8edd67def88966a6e5ee30"],["C:/Users/Adish/Documents/burger-builder/build/static/js/main.6f7b74a0.js","dafecb5452030a160918a49192783d81"],["C:/Users/Adish/Documents/burger-builder/build/static/media/burger-logo.b8503d26.png","b8503d262bffbfb7c67fd6762963e7d1"]];
+var precacheConfig = [["C:/Users/Adish/Documents/burger-builder/build/index.html","718f3cc548f5bc9c293840f9a97c73c4"],["C:/Users/Adish/Documents/burger-builder/build/static/css/main.d1a950da.css","76615022e7eda55b29b19ca835394b55"],["C:/Users/Adish/Documents/burger-builder/build/static/js/0.147cd165.chunk.js","6345e5a2627db0adb37d5fa1b01d78ca"],["C:/Users/Adish/Documents/burger-builder/build/static/js/1.d517d903.chunk.js","5f51445ba1f54413c2010f78c04c2b59"],["C:/Users/Adish/Documents/burger-builder/build/static/js/2.de5893d1.chunk.js","381686a0a09f7e3a46d8d56ab239b211"],["C:/Users/Adish/Documents/burger-builder/build/static/js/main.61282063.js","b65249aaca64a263211231b5a0acb402"],["C:/Users/Adish/Documents/burger-builder/build/static/media/burger-logo.b8503d26.png","b8503d262bffbfb7c67fd6762963e7d1"]];
 var cacheName = 'sw-precache-v2-sw-precache-webpack-plugin-' + (self.registration ? self.registration.scope : '');
 
 
@@ -196,7 +196,7 @@ self.addEventListener('fetch', function(event) {
 
     // If shouldRespond is still false, check to see if this is a navigation
     // request, and if so, whether the URL matches navigateFallbackWhitelist.
-    var navigateFallback = '/adish450/BurgerBuilder/index.html';
+    var navigateFallback = '/BurgerBuilder/index.html';
     if (!shouldRespond &&
         navigateFallback &&
         (event.request.mode === 'navigate') &&
