@@ -12,7 +12,7 @@ const INGREDIENT_PRICES = {
     salad: 0.5,
     cheese: 0.4,
     meat: 1.3,
-    bacon: 0.7
+    mushroom: 0.7
 };
 
 
@@ -44,7 +44,7 @@ const setIngredient = (state, action) => {
         error: false,
         ingredients: {
             salad: action.ingredients.salad,
-            bacon: action.ingredients.bacon,
+            mushroom: action.ingredients.mushroom,
             cheese: action.ingredients.cheese,
             meat: action.ingredients.meat
         },
